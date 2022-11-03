@@ -44,25 +44,10 @@ use LaswitchTech\phpEncryption\Encryption;
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption("My Secret");
-```
-
-#### Initiate without a secret
-If you do not provide a secret, one will be generated for you.
-```php
-
-//Import Encryption class into the global namespace
-//These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
-
-//Load Composer's autoloader
-require 'vendor/autoload.php';
-
-//Initiate Class Encryption
 $phpEncryption = new Encryption();
 ```
 
-#### Get your Secret
+#### Set your own Initial Value
 ```php
 
 //Import Encryption class into the global namespace
@@ -75,8 +60,31 @@ require 'vendor/autoload.php';
 //Initiate Class Encryption
 $phpEncryption = new Encryption();
 
-//Output Secret
-echo json_encode($phpEncryption->secret(), JSON_PRETTY_PRINT) . PHP_EOL;
+//Set Initial Value
+$InitialValue = $phpEncryption->setInitialValue("My Initial Value");
+
+//Output Initial Value
+echo json_encode($InitialValue, JSON_PRETTY_PRINT) . PHP_EOL;
+```
+
+#### Set your own Secret
+```php
+
+//Import Encryption class into the global namespace
+//These must be at the top of your script, not inside a function
+use LaswitchTech\phpEncryption\Encryption;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+//Initiate Class Encryption
+$phpEncryption = new Encryption();
+
+//Set Secret Value
+$Secret = $phpEncryption->setSecret("My Secret");
+
+//Output Initial Value
+echo json_encode($Secret, JSON_PRETTY_PRINT) . PHP_EOL;
 ```
 
 #### Encrypt Data
@@ -92,8 +100,11 @@ require 'vendor/autoload.php';
 //Initiate Class Encryption
 $phpEncryption = new Encryption();
 
-//Output Encrypted
-echo json_encode($phpEncryption->encrypt('Hello Wolrd!'), JSON_PRETTY_PRINT) . PHP_EOL;
+//Encrypt Data
+$Data = $phpEncryption->encrypt("Hello Wolrd!");
+
+//Output Encrypted Data
+echo json_encode($Data, JSON_PRETTY_PRINT) . PHP_EOL;
 ```
 
 #### Decrypt Data
@@ -109,6 +120,49 @@ require 'vendor/autoload.php';
 //Initiate Class Encryption
 $phpEncryption = new Encryption();
 
-//Output Decrypted
-echo json_encode($phpEncryption->decrypt($phpEncryption->encrypt('Hello Wolrd!')), JSON_PRETTY_PRINT) . PHP_EOL;
+//Decrypt Data
+$Data = $phpEncryption->decrypt($Data);
+
+//Output Decrypted Data
+echo json_encode($Data, JSON_PRETTY_PRINT) . PHP_EOL;
+```
+
+#### Encrypt File
+```php
+
+//Import Encryption class into the global namespace
+//These must be at the top of your script, not inside a function
+use LaswitchTech\phpEncryption\Encryption;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+//Initiate Class Encryption
+$phpEncryption = new Encryption();
+
+//Encrypt File
+$File = $phpEncryption->encrypt('decrypted.txt', 'encrypted.txt');
+
+//Output Encrypted File
+echo json_encode($File, JSON_PRETTY_PRINT) . PHP_EOL;
+```
+
+#### Decrypt File
+```php
+
+//Import Encryption class into the global namespace
+//These must be at the top of your script, not inside a function
+use LaswitchTech\phpEncryption\Encryption;
+
+//Load Composer's autoloader
+require 'vendor/autoload.php';
+
+//Initiate Class Encryption
+$phpEncryption = new Encryption();
+
+//Decrypt File
+$File = $phpEncryption->decrypt('encrypted.txt', 'decrypted.txt');
+
+//Output Decrypted File
+echo json_encode($File, JSON_PRETTY_PRINT) . PHP_EOL;
 ```
