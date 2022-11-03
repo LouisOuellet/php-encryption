@@ -43,7 +43,7 @@ use LaswitchTech\phpEncryption\Encryption;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Connect SQL Encryption
+//Initiate Class Encryption
 $phpEncryption = new Encryption("My Secret");
 ```
 
@@ -58,7 +58,7 @@ use LaswitchTech\phpEncryption\Encryption;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Connect SQL Encryption
+//Initiate Class Encryption
 $phpEncryption = new Encryption();
 ```
 
@@ -72,7 +72,7 @@ use LaswitchTech\phpEncryption\Encryption;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Connect SQL Encryption
+//Initiate Class Encryption
 $phpEncryption = new Encryption();
 
 //Output Secret
@@ -89,7 +89,7 @@ use LaswitchTech\phpEncryption\Encryption;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Connect SQL Encryption
+//Initiate Class Encryption
 $phpEncryption = new Encryption();
 
 //Output Encrypted
@@ -106,7 +106,7 @@ use LaswitchTech\phpEncryption\Encryption;
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
-//Connect SQL Encryption
+//Initiate Class Encryption
 $phpEncryption = new Encryption();
 
 //Output Decrypted
