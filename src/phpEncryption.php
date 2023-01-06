@@ -5,60 +5,79 @@ namespace LaswitchTech\phpEncryption;
 
 class phpEncryption {
 
-  protected $secretHash;
-  protected $secretKey;
-  protected $encryptionMethod;
-  protected $secretInitialValue;
-  protected $InitialValue;
+  // Properties
 
-  public function __construct($encryptionMethod = 'AES-256-CBC'){
-    $this->encryptionMethod = $encryptionMethod;
-    $this->setSecret();
-    $this->setInitialValue();
+  protected $Cipher;
+  protected $PrivateKey;
+  protected $PrivateHash;
+  protected $PublicKey;
+  protected $PublicHash;
+
+  // Constructor
+
+  public function __construct(){
+
+    // Basic Configuration
+    $this->setCipher();
+    $this->setPublicKey();
+    $this->setPrivateKey();
   }
 
-  public function hex($length = 16){
+  // Helpers
+
+  protected function hex($length = 16){
     return bin2hex(openssl_random_pseudo_bytes($length = 16));
   }
 
-  public function setSecret($secretHash = null){
-    if($secretHash != null){ $this->secretHash = $secretHash; }
-    else { $this->secretHash = $this->hex(); }
-    $this->secretKey = hash( 'sha256', $this->secretHash );
-    return $this->secretKey;
+  protected function hash($string){
+    return hash( 'sha256', $string );
   }
 
-  public function setInitialValue($secretInitialValue = null){
-    if($secretInitialValue != null){ $this->secretInitialValue = $secretInitialValue; }
-    else { $this->secretInitialValue = $this->hex(); }
-    $this->secretInitialValue = hash( 'sha256', $this->secretInitialValue );
-    $this->InitialValue = substr( hash( 'sha256', $this->secretInitialValue ), 0, 16 );
-    return $this->secretInitialValue;
+  // Configure
+
+  public function setCipher($cipher = null){
+    if($cipher == null || !is_string($cipher)){ $cipher = 'AES-256-CBC'; }
+    if(in_array($cipher,openssl_get_cipher_methods())){ $this->Cipher = $cipher; }
   }
+
+  public function setPublicKey($key = null){
+    if($key == null || !is_string($key)){ $key = $this->hex(); }
+    $this->PublicKey = $key;
+    $this->PublicHash = $this->hash($this->PublicKey);
+  }
+
+  public function setPrivateKey($key = null){
+    if($key == null || !is_string($key)){ $key = $this->hex(); }
+    $this->PrivateKey = $key;
+    $this->PrivateHash = $this->hash($this->PrivateKey);
+    $this->PrivateHash = substr($this->PrivateHash, 0, openssl_cipher_iv_length($this->Cipher));
+  }
+
+  // Methods
 
   public function encrypt($string, $filename = null){
     if(is_file($string)){
-      if($filename == null){ $filename = $string.'.'.$this->encryptionMethod; }
-      $blob = base64_encode( openssl_encrypt( file_get_contents($string), $this->encryptionMethod, $this->secretKey, 0, $this->InitialValue ) );
+      if($filename == null){ $filename = $string.'.'.$this->Cipher; }
+      $blob = base64_encode( openssl_encrypt( file_get_contents($string), $this->Cipher, $this->PublicHash, 0, $this->PrivateHash ) );
       $file = fopen($filename, 'w');
       fwrite($file, $blob);
       fclose($file);
       return $filename;
     } elseif(is_string($string)){
-      return base64_encode( openssl_encrypt( $string, $this->encryptionMethod, $this->secretKey, 0, $this->InitialValue ) );
+      return base64_encode( openssl_encrypt( $string, $this->Cipher, $this->PublicHash, 0, $this->PrivateHash ) );
     } else { return false; }
   }
 
   public function decrypt($string, $filename = null){
     if(is_file($string)){
-      if($filename == null){ str_replace($this->encryptionMethod,'',$string); }
-      $blob = openssl_decrypt( base64_decode( file_get_contents($string) ), $this->encryptionMethod, $this->secretKey, 0, $this->InitialValue );
+      if($filename == null){ str_replace($this->Cipher,'',$string); }
+      $blob = openssl_decrypt( base64_decode( file_get_contents($string) ), $this->Cipher, $this->PublicHash, 0, $this->PrivateHash );
       $file = fopen($filename, 'w');
       fwrite($file, $blob);
       fclose($file);
       return $filename;
     } elseif(is_string($string)) {
-      return openssl_decrypt( base64_decode( $string ), $this->encryptionMethod, $this->secretKey, 0, $this->InitialValue );
+      return openssl_decrypt( base64_decode( $string ), $this->Cipher, $this->PublicHash, 0, $this->PrivateHash );
     } else { return false; }
   }
 }

@@ -47,7 +47,7 @@ require 'vendor/autoload.php';
 $phpEncryption = new phpEncryption();
 ```
 
-#### Set your own Initial Value
+#### Set your own PrivateKey
 ```php
 
 //Import phpEncryption class into the global namespace
@@ -61,13 +61,13 @@ require 'vendor/autoload.php';
 $phpEncryption = new phpEncryption();
 
 //Set Initial Value
-$InitialValue = $phpEncryption->setInitialValue("My Initial Value");
+$PrivateKey = $phpEncryption->setPrivateKey("My Private Key");
 
 //Output Initial Value
-echo json_encode($InitialValue, JSON_PRETTY_PRINT) . PHP_EOL;
+echo json_encode($PrivateKey, JSON_PRETTY_PRINT) . PHP_EOL;
 ```
 
-#### Set your own Secret
+#### Set your own PublicKey
 ```php
 
 //Import phpEncryption class into the global namespace
@@ -81,10 +81,10 @@ require 'vendor/autoload.php';
 $phpEncryption = new phpEncryption();
 
 //Set Secret Value
-$Secret = $phpEncryption->setSecret("My Secret");
+$PublicKey = $phpEncryption->setPublicKey("My Public Key");
 
 //Output Initial Value
-echo json_encode($Secret, JSON_PRETTY_PRINT) . PHP_EOL;
+echo json_encode($PublicKey, JSON_PRETTY_PRINT) . PHP_EOL;
 ```
 
 #### Encrypt Data
