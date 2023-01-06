@@ -36,7 +36,13 @@ class phpEncryption {
   // Configure
 
   public function setCipher($cipher = null){
-    if($cipher == null || !is_string($cipher)){ $cipher = 'AES-256-CBC'; }
+    if($cipher == null || !is_string($cipher)){
+      if(defined('ENCRYPTION_CIPHER')){
+        $cipher = ENCRYPTION_CIPHER;
+      } else {
+        $cipher = 'AES-256-CBC';
+      }
+    }
     if(in_array($cipher,openssl_get_cipher_methods())){ $this->Cipher = $cipher; }
   }
 
@@ -47,7 +53,13 @@ class phpEncryption {
   }
 
   public function setPrivateKey($key = null){
-    if($key == null || !is_string($key)){ $key = $this->hex(); }
+    if($key == null || !is_string($key)){
+      if(defined('ENCRYPTION_KEY')){
+        $key = ENCRYPTION_KEY;
+      } else {
+        $key = $this->hex();
+      }
+    }
     $this->PrivateKey = $key;
     $this->PrivateHash = $this->hash($this->PrivateKey);
     $this->PrivateHash = substr($this->PrivateHash, 0, openssl_cipher_iv_length($this->Cipher));
