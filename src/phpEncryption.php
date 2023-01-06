@@ -3,7 +3,7 @@
 //Declaring namespace
 namespace LaswitchTech\phpEncryption;
 
-class Encryption {
+class phpEncryption {
 
   protected $secretHash;
   protected $secretKey;
@@ -17,8 +17,8 @@ class Encryption {
     $this->setInitialValue();
   }
 
-  protected function hex(){
-    return bin2hex(openssl_random_pseudo_bytes(16));
+  public function hex($length = 16){
+    return bin2hex(openssl_random_pseudo_bytes($length = 16));
   }
 
   public function setSecret($secretHash = null){

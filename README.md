@@ -36,29 +36,29 @@ composer require laswitchtech/php-encryption
 #### Initiate
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 ```
 
 #### Set your own Initial Value
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Set Initial Value
 $InitialValue = $phpEncryption->setInitialValue("My Initial Value");
@@ -70,15 +70,15 @@ echo json_encode($InitialValue, JSON_PRETTY_PRINT) . PHP_EOL;
 #### Set your own Secret
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Set Secret Value
 $Secret = $phpEncryption->setSecret("My Secret");
@@ -90,15 +90,15 @@ echo json_encode($Secret, JSON_PRETTY_PRINT) . PHP_EOL;
 #### Encrypt Data
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Encrypt Data
 $Data = $phpEncryption->encrypt("Hello Wolrd!");
@@ -110,15 +110,15 @@ echo json_encode($Data, JSON_PRETTY_PRINT) . PHP_EOL;
 #### Decrypt Data
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Decrypt Data
 $Data = $phpEncryption->decrypt($Data);
@@ -130,15 +130,15 @@ echo json_encode($Data, JSON_PRETTY_PRINT) . PHP_EOL;
 #### Encrypt File
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Encrypt File
 $File = $phpEncryption->encrypt('decrypted.txt', 'encrypted.txt');
@@ -150,15 +150,15 @@ echo json_encode($File, JSON_PRETTY_PRINT) . PHP_EOL;
 #### Decrypt File
 ```php
 
-//Import Encryption class into the global namespace
+//Import phpEncryption class into the global namespace
 //These must be at the top of your script, not inside a function
-use LaswitchTech\phpEncryption\Encryption;
+use LaswitchTech\phpEncryption\phpEncryption;
 
 //Load Composer's autoloader
 require 'vendor/autoload.php';
 
 //Initiate Class Encryption
-$phpEncryption = new Encryption();
+$phpEncryption = new phpEncryption();
 
 //Decrypt File
 $File = $phpEncryption->decrypt('encrypted.txt', 'decrypted.txt');
